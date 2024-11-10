@@ -24,7 +24,7 @@ function DataMahasiswaScreen() {
 function WebScreen() {
   return (
     <WebView
-        source={{ uri: 'https://github.com/titaama' }}
+        source={{ uri: 'https://github.com/titamaa/' }}
       /> 
   );
 }
