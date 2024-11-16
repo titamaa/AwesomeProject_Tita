@@ -1,0 +1,22 @@
+{
+  "mahasiswa": [
+    {
+      "id": "1",
+      "first_name": "Alia",
+      "last_name": "Maulana Resti",
+      "email": "aliamaulanaresti@mail.ugm.ac.id",
+      "kelas": "A",
+      "gender": "female",
+      "latitude": -7.6926245,
+      "longitude": 110.6718403
+    },
+    {
+      "id": "0c6b",
+      "first_name": "Tita Amalia",
+      "last_name": "Sudarma",
+      "email": "titaama@mail.ugm.ac.id",
+      "kelas": "A",
+      "gender": "Perempuan"
+    }
+  ]
+}

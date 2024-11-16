@@ -4,29 +4,38 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Profil from './App';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faUser, faUserGraduate} from '@fortawesome/free-solid-svg-icons';
+import { faUser, faUserGraduate, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { WebView } from 'react-native-webview';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import Createdata from './Createdata';
+import Listdata from './Listdata';
+import Editdata from './Editdata';
 
 import Mahasiswa from './Mahasiswa';
 
 function HomeScreen() {
   return (
-    <Profil/>
+    <Createdata/>
   );
 }
 
 function SettingsScreen() {
   return (
-   <Mahasiswa/>
+   <Listdata/>
   );
 }
 
+function EditdataScreen() {
+  return (
+   <Editdata/>
+  );
+}
 function WebScreen() {
   return (
     <WebView
-        source={{ uri: 'https://github.com/titamaa/' }}
-      /> 
+      source={{ uri: 'https://github.com/titamaa' }}
+      style={{ flex: 1 }} // Optional: Makes WebView take up the full screen
+    />
   );
 }
 
@@ -64,6 +73,16 @@ export default function App() {
             ),
           }}
         />
+        <Tab.Screen
+                  name="Edit"
+                  component={EditdataScreen}
+                  options={{
+                    headerShown: false,
+                    tabBarIcon: ({ color }) => (
+                      <FontAwesomeIcon icon={faEdit} color={color} size={20} />
+                    ),
+                  }}
+                />
       </Tab.Navigator>
     </NavigationContainer>
   );
