@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Profil from './App';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faUser, faUserGraduate, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle, faUserGraduate, faUserPen } from '@fortawesome/free-solid-svg-icons';
 import { WebView } from 'react-native-webview';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import Createdata from './Createdata';
@@ -46,12 +46,12 @@ export default function App() {
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen
-          name="Home"
+          name="Tambah"
           component={HomeScreen}
           options={{
             headerShown: false,
             tabBarIcon: ({ color }) => (
-              <FontAwesomeIcon icon={faUser} color={color} size={20} />
+              <FontAwesomeIcon icon={faPlusCircle} color={color} size={20} />
             ),
           }}
         />
@@ -65,21 +65,21 @@ export default function App() {
           }}
         />
         <Tab.Screen
-          name="Github"
-          component={WebScreen}
-          options={{
-            tabBarIcon: ({ color }) => (
-              <FontAwesomeIcon icon={faGithub} color={color} size={20} />
-            ),
-          }}
-        />
-        <Tab.Screen
                   name="Edit"
                   component={EditdataScreen}
                   options={{
                     headerShown: false,
                     tabBarIcon: ({ color }) => (
-                      <FontAwesomeIcon icon={faEdit} color={color} size={20} />
+                      <FontAwesomeIcon icon={faUserPen} color={color} size={20} />
+                    ),
+                  }}
+                />
+        <Tab.Screen
+                  name="Github"
+                  component={WebScreen}
+                  options={{
+                    tabBarIcon: ({ color }) => (
+                      <FontAwesomeIcon icon={faGithub} color={color} size={20} />
                     ),
                   }}
                 />
