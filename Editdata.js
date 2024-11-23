@@ -34,7 +34,7 @@ const Createdata = () => {
 
   const handleSubmit = () => {
     const data = { first_name, last_name, kelas, gender, email };
-    const url = selectedUser ? `${jsonUrl}/${selectedUser.id}` : jsonUrl;
+    const url = selectedUser ? `${jsonUrl}/${selectedUser.id} `: jsonUrl;
     const method = selectedUser ? 'PATCH' : 'POST';
 
     fetch(url, {
