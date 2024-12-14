@@ -1,11 +1,45 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Nama Produk: SELUMBUNG!
+
+## Deskripsi Produk
+**SELUMBUNG!** adalah aplikasi monitoring dan pengelolaan data pertanian berbasis mobile. Aplikasi ini dirancang untuk membantu petani, penyuluh, dan pemangku kepentingan lainnya dalam memantau hasil pertanian, mengelola informasi, serta membuat keputusan berbasis data. Dengan antarmuka yang sederhana dan mudah digunakan, aplikasi ini bertujuan untuk meningkatkan efisiensi dan produktivitas sektor pertanian.
+
+## Komponen Pembangun Produk
+- **React Native**: Framework utama untuk membangun aplikasi mobile.
+- **Metro Bundler**: JavaScript bundler bawaan React Native.
+- **Node.js**: Untuk mengelola dependensi dan skrip aplikasi.
+- **Android Studio & Xcode**: Emulator/simulator untuk pengujian aplikasi di Android dan iOS.
+- **Backend/API**: Menggunakan RESTful API untuk pengelolaan data (opsional, sesuai dengan kebutuhan).
+
+## Sumber Data
+Aplikasi ini menggunakan data:
+- Data pertanian yang diunggah oleh pengguna.
+
+## Tangkapan Layar Komponen Penting Produk
+### Halaman Utama
+![Halaman Utama](./screenshots/homepage.jpeg)
+
+### Halaman Input Data
+![Halaman Input Data](./screenshots/inputdata.jpeg)
+
+### Halaman List Data
+![Halaman List Data](./screenshots/datatanaman.jpeg)
+
+### Halaman Maps
+![Halaman Maps](./screenshots/map.jpeg)
+
+### Halaman Edit Data
+![Halaman Edit Data](./screenshots/edit.jpeg)
+
+### Halaman Tentang
+![Halaman Tentang App](./screenshots/tentang.jpeg)
+
+---
 
 # Getting Started
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+> **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
 ## Step 1: Start the Metro Server
-
 First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
 
 To start Metro, run the following command from the _root_ of your React Native project:
@@ -19,7 +53,6 @@ yarn start
 ```
 
 ## Step 2: Start your Application
-
 Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
 
 ### For Android
@@ -43,8 +76,6 @@ yarn ios
 ```
 
 If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
 
 ## Step 3: Modifying your App
 

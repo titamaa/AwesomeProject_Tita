@@ -1,22 +1,58 @@
 {
-  "mahasiswa": [
+  "lahan": [
     {
-      "id": "1",
-      "first_name": "Alia",
-      "last_name": "Maulana Resti",
-      "email": "aliamaulanaresti@mail.ugm.ac.id",
-      "kelas": "A",
-      "gender": "female",
-      "latitude": -7.6926245,
-      "longitude": 110.6718403
+      "id": "LHN01",
+      "nama": "Lahan A",
+      "jenis": "Padi",
+      "luas": "5200",
+      "tanggal": "2023-03-01",
+      "status": "Proses Tanam",
+      "latitude": -7.7526245,
+      "longitude": 110.6938403
     },
     {
-      "id": "0c6b",
-      "first_name": "Tita Amalia",
-      "last_name": "Sudarma",
-      "email": "titaama@mail.ugm.ac.id",
-      "kelas": "B",
-      "gender": "female"
+      "id": "LHN02",
+      "nama": "Lahan B",
+      "jenis": "Jagung",
+      "luas": "7000",
+      "tanggal": "2023-04-15",
+      "status": "Berbuah",
+      "latitude": -7.7626245,
+      "longitude": 110.7038403
+    },
+    {
+      "id": "LHN03",
+      "nama": "Lahan C",
+      "jenis": "Cabai",
+      "luas": "2500",
+      "tanggal": "2023-01-10",
+      "status": "Mati",
+      "latitude": -7.7326245,
+      "longitude": 110.6838403
+    },
+    {
+      "id": "2ccd",
+      "nama": "Lahan D",
+      "jenis": "Cengkih",
+      "luas": "5000",
+      "tanggal": "2023-01-02",
+      "status": "Mati"
+    },
+    {
+      "id": "9de0",
+      "nama": "Lahan Yoga",
+      "jenis": "Palawija",
+      "luas": 2000,
+      "tanggal": "2023-04-02",
+      "status": "Berbuah"
+    },
+    {
+      "id": "bf94",
+      "nama": "Parto",
+      "jenis": "Sawit",
+      "luas": 1000,
+      "tanggal": "2023-02-04",
+      "status": "Proses Tanam"
     }
   ]
 }

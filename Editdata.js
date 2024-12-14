@@ -9,16 +9,16 @@ import {
   ScrollView,
 } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faGraduationCap, faEdit, faSave, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faSpa, faEdit, faSave, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const Createdata = () => {
-  const jsonUrl = 'http://10.0.2.2:3000/mahasiswa';
+  const jsonUrl = 'http://192.168.180.147:3000/lahan';
   const [dataUser, setDataUser] = useState([]);
-  const [first_name, setFirstName] = useState('');
-  const [last_name, setLastName] = useState('');
-  const [kelas, setKelas] = useState('');
-  const [gender, setGender] = useState('');
-  const [email, setEmail] = useState('');
+  const [nama, setNama] = useState('');
+  const [jenis, setJenis] = useState('');
+  const [luas, setLuas] = useState('');
+  const [tanggal, setTanggal] = useState('');
+  const [status, setStatus] = useState('');
   const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(() => {
@@ -33,8 +33,8 @@ const Createdata = () => {
   };
 
   const handleSubmit = () => {
-    const data = { first_name, last_name, kelas, gender, email };
-    const url = selectedUser ? `${jsonUrl}/${selectedUser.id} `: jsonUrl;
+    const data = { nama, jenis, luas, tanggal, status };
+    const url = selectedUser ? `${jsonUrl}/${selectedUser.id}` : jsonUrl;
     const method = selectedUser ? 'PATCH' : 'POST';
 
     fetch(url, {
@@ -51,87 +51,95 @@ const Createdata = () => {
   };
 
   const clearForm = () => {
-    setFirstName('');
-    setLastName('');
-    setKelas('');
-    setGender('');
-    setEmail('');
+    setNama('');
+    setJenis('');
+    setLuas('');
+    setTanggal('');
+    setStatus('');
     setSelectedUser(null);
   };
 
   const selectItem = (item) => {
     setSelectedUser(item);
-    setFirstName(item.first_name);
-    setLastName(item.last_name);
-    setKelas(item.kelas);
-    setGender(item.gender);
-    setEmail(item.email);
+    setNama(item.nama);
+    setJenis(item.jenis);
+    setLuas(item.luas);
+    setTanggal(item.tanggal);
+    setStatus(item.status);
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.formContainer}>
-        <Text style={styles.title}>{selectedUser ? 'Edit Data Mahasiswa' : 'Tambah Data Mahasiswa'}</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Nama Depan"
-          placeholderTextColor="#aaa"
-          value={first_name}
-          onChangeText={setFirstName}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Nama Belakang"
-          placeholderTextColor="#aaa"
-          value={last_name}
-          onChangeText={setLastName}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Kelas"
-          placeholderTextColor="#aaa"
-          value={kelas}
-          onChangeText={setKelas}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Jenis Kelamin"
-          placeholderTextColor="#aaa"
-          value={gender}
-          onChangeText={setGender}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          placeholderTextColor="#aaa"
-          value={email}
-          onChangeText={setEmail}
-        />
-        <TouchableOpacity
-          style={[styles.button, selectedUser ? styles.editButton : styles.addButton]}
-          onPress={handleSubmit}
-        >
-          <FontAwesomeIcon icon={selectedUser ? faSave : faPlus} size={16} color="#fff" />
-          <Text style={styles.buttonText}>{selectedUser ? 'Simpan' : 'Tambah'}</Text>
-        </TouchableOpacity>
-      </View>
-      <ScrollView style={styles.listContainer}>
-        {dataUser.map((item) => (
-          <View key={item.id} style={styles.card}>
-            <View style={styles.avatar}>
-              <FontAwesomeIcon icon={faGraduationCap} size={40} color="#4CAF50" />
+      <ScrollView>
+        {/* Form Section */}
+        <View style={styles.formContainer}>
+          <Text style={styles.title}>
+            {selectedUser ? 'Edit Data Lahan' : 'Tambah Data Lahan'}
+          </Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Nama"
+            placeholderTextColor="#aaa"
+            value={nama}
+            onChangeText={setNama}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Jenis"
+            placeholderTextColor="#aaa"
+            value={jenis}
+            onChangeText={setJenis}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Luas"
+            placeholderTextColor="#aaa"
+            value={luas}
+            onChangeText={setLuas}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Tanggal"
+            placeholderTextColor="#aaa"
+            value={tanggal}
+            onChangeText={setTanggal}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Status"
+            placeholderTextColor="#aaa"
+            value={status}
+            onChangeText={setStatus}
+          />
+          <TouchableOpacity
+            style={[styles.button, selectedUser ? styles.editButton : styles.addButton]}
+            onPress={handleSubmit}
+          >
+            <FontAwesomeIcon icon={selectedUser ? faSave : faPlus} size={16} color="#fff" />
+            <Text style={styles.buttonText}>{selectedUser ? 'Simpan' : 'Tambah'}</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* List Section */}
+        <View style={styles.listContainer}>
+          {dataUser.map((item) => (
+            <View key={item.id} style={styles.card}>
+              <View style={styles.avatar}>
+                <FontAwesomeIcon icon={faSpa} size={40} color="#4CAF50" />
+              </View>
+              <View style={styles.cardContent}>
+                <Text style={styles.cardTitle}>{item.nama}</Text>
+                <Text style={styles.cardText}>{item.jenis}</Text>
+                <Text style={styles.cardText}>{item.luas}</Text>
+                <Text style={styles.cardText}>{item.tanggal}</Text>
+                <Text style={styles.cardText}>{item.status}</Text>
+              </View>
+              <TouchableOpacity onPress={() => selectItem(item)} style={styles.editButtonCard}>
+                <FontAwesomeIcon icon={faEdit} size={20} color="#fff" />
+              </TouchableOpacity>
             </View>
-            <View style={styles.cardContent}>
-              <Text style={styles.cardTitle}>{item.first_name} {item.last_name}</Text>
-              <Text style={styles.cardText}>{item.kelas}</Text>
-              <Text style={styles.cardText}>{item.gender}</Text>
-              <Text style={styles.cardText}>{item.email}</Text>
-            </View>
-            <TouchableOpacity onPress={() => selectItem(item)} style={styles.editButtonCard}>
-              <FontAwesomeIcon icon={faEdit} size={20} color="#fff" />
-            </TouchableOpacity>
-          </View>
-        ))}
+          ))}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

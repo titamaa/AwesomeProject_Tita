@@ -10,14 +10,15 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faGraduationCap, faChevronRight, faTrash, faSync } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faSync, faSpa } from '@fortawesome/free-solid-svg-icons';
 
 const Listdata = () => {
-  const jsonUrl = 'http://10.0.2.2:3000/mahasiswa';
+  const jsonUrl = 'http://192.168.180.147:3000/lahan';
   const [isLoading, setLoading] = useState(true);
   const [dataUser, setDataUser] = useState([]);
   const [refresh, setRefresh] = useState(false);
 
+  // Fetch data from the API
   const fetchData = () => {
     setLoading(true);
     fetch(jsonUrl)
@@ -31,12 +32,14 @@ const Listdata = () => {
     fetchData();
   }, []);
 
+  // Refresh page function
   const refreshPage = () => {
     setRefresh(true);
     fetchData();
     setRefresh(false);
   };
 
+  // Delete data from the API
   const deleteData = (id) => {
     fetch(`${jsonUrl}/${id}`, { method: 'DELETE' })
       .then(() => {
@@ -48,7 +51,7 @@ const Listdata = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.header}>Mahasiswa D4 SIG</Text>
+      <Text style={styles.header}>Riwayat Tanaman</Text>
       {isLoading ? (
         <View style={styles.loader}>
           <ActivityIndicator size="large" color="#4CAF50" />
@@ -60,32 +63,43 @@ const Listdata = () => {
           onRefresh={refreshPage}
           refreshing={refresh}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <TouchableOpacity style={styles.card}>
-              <View style={styles.avatar}>
-                <FontAwesomeIcon icon={faGraduationCap} size={50} color="#4CAF50" />
+          renderItem={({ item }) => {
+            let iconColor = '#666';
+            if (item.status === 'Proses Tanam') {
+              iconColor = '#1E90FF'; // Biru
+            } else if (item.status === 'Berbuah') {
+              iconColor = '#008000'; // Hijau
+            } else if (item.status === 'Mati') {
+              iconColor = '#FF0000'; // Merah
+            }
+
+            return (
+              <View style={styles.card}>
+                <FontAwesomeIcon icon={faSpa} size={40} color={iconColor} style={styles.icon} />
+
+                <View style={styles.info}>
+                  <Text style={styles.name}>Nama Lahan: {item.nama}</Text>
+                  <Text style={styles.detail}>Jenis Tanaman: {item.jenis}</Text>
+                  <Text style={styles.detail}>Luas: {item.luas} m²</Text>
+                  <Text style={styles.detail}>Tanggal Tanam: {item.tanggal}</Text>
+                  <Text style={styles.detail}>Status: {item.status}</Text>
+                </View>
+
+                {/* Delete Button */}
+                <TouchableOpacity
+                  style={styles.deleteButton}
+                  onPress={() =>
+                    Alert.alert('Hapus Data', 'Yakin ingin menghapus data ini?', [
+                      { text: 'Tidak', onPress: () => console.log('Tidak') },
+                      { text: 'Ya', onPress: () => deleteData(item.id) },
+                    ])
+                  }
+                >
+                  <FontAwesomeIcon icon={faTrash} size={20} color="#fff" />
+                </TouchableOpacity>
               </View>
-              <View style={styles.info}>
-                <Text style={styles.name}>
-                  {item.first_name} {item.last_name}
-                </Text>
-                <Text style={styles.detail}>Kelas: {item.kelas}</Text>
-                <Text style={styles.detail}>Gender: {item.gender}</Text>
-                <Text style={styles.detail}>Email: {item.email}</Text>
-              </View>
-              <TouchableOpacity
-                style={styles.deleteButton}
-                onPress={() =>
-                  Alert.alert('Hapus Data', 'Yakin ingin menghapus data ini?', [
-                    { text: 'Tidak', onPress: () => console.log('Tidak') },
-                    { text: 'Ya', onPress: () => deleteData(item.id) },
-                  ])
-                }
-              >
-                <FontAwesomeIcon icon={faTrash} size={20} color="#fff" />
-              </TouchableOpacity>
-            </TouchableOpacity>
-          )}
+            );
+          }}
         />
       )}
 
@@ -96,8 +110,6 @@ const Listdata = () => {
     </SafeAreaView>
   );
 };
-
-export default Listdata;
 
 const styles = StyleSheet.create({
   container: {
@@ -137,14 +149,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
   },
-  avatar: {
-    marginRight: 15,
-    backgroundColor: '#e8f5e9',
-    padding: 12,
-    borderRadius: 50,
-  },
   info: {
     flex: 1,
+    marginLeft: 15,
   },
   name: {
     fontSize: 18,
@@ -178,4 +185,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3.5,
   },
+  icon: {
+    marginRight: 10,
+  },
 });
+
+export default Listdata;

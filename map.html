@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peta Lahan</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+        #legend {
+            padding: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div id="legend">
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #FF0000;"></div>
+            <span>Mati</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #00FF00;"></div>
+            <span>Berbuah</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #FFFF00;"></div>
+            <span>Proses Tanam</span>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([-7.7526245, 110.6938403], 12);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Data lahan dari JSON
+        var lahanData = {
+            "lahan": [
+                {
+                    "id": "LHN01",
+                    "nama": "Lahan A",
+                    "jenis": "Padi",
+                    "luas": "5200",
+                    "tanggal": "2023-03-01",
+                    "status": "Proses Tanam",
+                    "latitude": -7.7526245,
+                    "longitude": 110.6938403
+                },
+                {
+                    "id": "LHN02",
+                    "nama": "Lahan B",
+                    "jenis": "Jagung",
+                    "luas": "7000",
+                    "tanggal": "2023-04-15",
+                    "status": "Berbuah",
+                    "latitude": -7.7626245,
+                    "longitude": 110.7038403
+                },
+                {
+                    "id": "LHN03",
+                    "nama": "Lahan C",
+                    "jenis": "Cabai",
+                    "luas": "2500",
+                    "tanggal": "2023-01-10",
+                    "status": "Mati",
+                    "latitude": -7.7326245,
+                    "longitude": 110.6838403
+                },
+                {
+                    "id": "2ccd",
+                    "nama": "Lahan D",
+                    "jenis": "Cengkih",
+                    "luas": "5000",
+                    "tanggal": "2023-01-02",
+                    "status": "Mati",
+                    "latitude": -7.7326245,
+                    "longitude": 110.7238403
+                },
+                {
+                    "id": "9de0",
+                    "nama": "Lahan Yoga",
+                    "jenis": "Palawija",
+                    "luas": 2000,
+                    "tanggal": "2023-04-02",
+                    "status": "Berbuah",
+                    "latitude": -7.7326245,
+                    "longitude": 110.7038403
+                }
+            ]
+        };
+
+        // Fungsi untuk menentukan warna berdasarkan status
+        function getColorByStatus(status) {
+            switch (status) {
+                case "Mati":
+                    return "#FF0000"; // Merah untuk mati
+                case "Berbuah":
+                    return "#00FF00"; // Hijau untuk berbuah
+                case "Proses Tanam":
+                    return "#FFFF00"; // Kuning untuk proses tanam
+            }
+        }
+
+        // Tambahkan marker ke peta dengan warna sesuai status
+        lahanData.lahan.forEach(item => {
+            if (item.latitude && item.longitude) {
+                var marker = L.circleMarker([item.latitude, item.longitude], {
+                    radius: 8,
+                    color: getColorByStatus(item.status),
+                    fillColor: getColorByStatus(item.status),
+                    fillOpacity: 0.7
+                }).addTo(map);
+                marker.bindPopup(`
+                    <b>Nama Lahan:</b> ${item.nama}<br>
+                    <b>Jenis Tanaman:</b> ${item.jenis}<br>
+                    <b>Luas:</b> ${item.luas} m²<br>
+                    <b>Status:</b> ${item.status}<br>
+                    <b>Tanggal:</b> ${item.tanggal}<br>
+                `);
+            }
+        });
+    </script>
+</body>
+</html>
